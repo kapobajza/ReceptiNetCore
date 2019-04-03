@@ -1,0 +1,28 @@
+﻿@model IzmijeniKorisnikaViewModel
+@{
+    ViewData["Title"] = "Izmijeni";
+}
+
+<div class="form-container">
+    <h2 class="heading">Korisnički profil</h2>
+
+    <form method="post">
+        <div class="form-control">
+            <label asp-for="Ime"></label>
+            <input asp-for="Ime" />
+            <span asp-validation-for="Ime"></span>
+        </div>
+
+        <div class="form-control">
+            <label asp-for="Prezime"></label>
+            <input asp-for="Prezime" />
+            <span asp-validation-for="Prezime"></span>
+        </div>
+
+        <button type="submit" class="button">Sačuvaj</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/js/jquery-validate-bundle.min.js"></script>
+}

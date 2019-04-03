@@ -1,0 +1,11 @@
+﻿@model KorisnikReceptiViewModel
+@{
+    ViewData["Title"] = "Moji recepti";
+}
+
+<div class="recepti-container">
+    <h2 class="heading">Moji recepti</h2>
+    @await Html.PartialAsync("~/Views/Recepti/_ReceptiHeaderButtons.cshtml", new HeaderButtonsViewModel() { IsHomePage = false, Kategorije = Model.Kategorije })
+    @await Html.PartialAsync("~/Views/Recepti/_ListaRecepata.cshtml", Model)
+</div>
+

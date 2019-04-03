@@ -1,0 +1,35 @@
+﻿@model PromijeniLozinkuViewModel
+@{
+    ViewData["Title"] = "Promijeni lozinku";
+}
+
+<div class="form-container">
+    <h2 class="heading">Korisnički profil</h2>
+
+    <form method="post">
+        <div class="form-control">
+            <label asp-for="TrenutnaLozinka"></label>
+            <input asp-for="TrenutnaLozinka" value="@Model?.TrenutnaLozinka" />
+            <span asp-validation-for="TrenutnaLozinka"></span>
+        </div>
+
+        <div class="form-control">
+            <label asp-for="NovaLozinka"></label>
+            <input asp-for="NovaLozinka" />
+            <span asp-validation-for="NovaLozinka"></span>
+        </div>
+
+        <div class="form-control">
+            <label asp-for="NovaLozinkaPonovo"></label>
+            <input asp-for="NovaLozinkaPonovo" />
+            <span asp-validation-for="NovaLozinkaPonovo"></span>
+        </div>
+
+        <button type="submit" class="button">Sačuvaj</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/js/jquery-validate-bundle.min.js"></script>
+}
+

@@ -1,0 +1,18 @@
+﻿@model HeaderButtonsViewModel
+<div class="recepti-header-buttons">
+    <div class="recepti-search-container">
+        @if (Model.IsHomePage)
+        {
+            <a class="button btn-dodaj-recept" asp-action="DodajIzmijeni" asp-controller="Recepti">Dodaj novi recept</a>
+        }
+        <div class="pretraga-buttons">
+            <input type="search" id="search-recepti" placeholder="Ključna riječ" />
+            <button class="button button-green" id="btn-search-recepti">Pretraga</button>
+        </div>
+    </div>
+    <div class="recepti-filter-container">
+        <label>Filtriraj po kategoriji: </label>
+        <select asp-items="Model.Kategorije" id="select-filter-kategorije"></select>
+    </div>
+</div>
+<div class="loader"></div>

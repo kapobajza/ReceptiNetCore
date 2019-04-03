@@ -1,0 +1,46 @@
+﻿@model KorisnikReceptiViewModel
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<div class="recepti-list">
+    @foreach (var item in Model.Recepti)
+    {
+        <div class="recept-row">
+            <div style="background: url(/slike-recepata/@item.SlikaURL) no-repeat center center; background-size: cover;" class="recept-image"></div>
+            <div class="recept-details">
+                <h2>@item.Naziv</h2>
+
+                <div class="recept-additional-details">
+                    <p class="recept-tooltip">
+                        @if (!string.IsNullOrEmpty(item.Korisnik))
+                        {
+                            @($"Dodao: {item.Korisnik},")
+                            <div class="tooltip" style="margin-left: 5px">@item.DatumObjave<span class="tooltip-text">@item.DatumObjaveFull</span></div>
+                        }
+                        else
+                        {
+                            <div class="tooltip">Dodan: @item.DatumObjave<span class="tooltip-text">@item.DatumObjaveFull</span></div>
+                        }
+                    </p>
+
+                    <p>Kategorija: @item.Kategorija</p>
+                </div>
+
+                <div class="recepti-buttons">
+                    <a class="button button-green procitaj-vise-btn" asp-action="Detalji" asp-controller="Recepti" asp-route-id="@item.ReceptId">Pročitaj više</a>
+                    @if (item.KorisnikId == Model.KorisnikId)
+                    {
+                        <a class="button" asp-action="DodajIzmijeni" asp-controller="Recepti" asp-route-id="@item.ReceptId">Izmijeni</a>
+                    }
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <form method="post" asp-action="Brisi" asp-controller="Recepti" asp-route-id="@item.ReceptId" class="form-recept-brisi">
+                            <button class="button" type="submit">Izbriši</button>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

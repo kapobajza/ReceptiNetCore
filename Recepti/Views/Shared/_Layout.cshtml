@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico">
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.0/css/all.css" integrity="sha384-Mmxa0mLqhmOeaE8vgOSbKacftZcsNYDjQzuCOm6D02luYSzBG8vpaOykv9lFQ51Y" crossorigin="anonymous">
+    </environment>
+</head>
+<body>
+    @if (TempData["poruka"] != null)
+    {
+        <div class="notification-container">
+            <div class="notification">@TempData["poruka"]</div>
+        </div>
+    }
+
+    <div class="container body-content">
+        <div class="header">
+            <div style="display: flex; align-items:center">
+                <a asp-action="Index" asp-controller="Home" class="home-link"><h1>Reci "PE"</h1></a>
+            </div>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <a class="button" asp-action="Login" asp-controller="Account">Log in</a>
+            }
+            else
+            {
+                <div class="account-logged-in-btns">
+                    <div class="user-icon">
+                        <span style="margin-right: 10px; display: inline-block;">@User.Identity.Name</span>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="icon-buttons hidden">
+                        <a class="button" asp-action="Logout" asp-controller="Account">Logout</a>
+                        <a class="button" asp-action="Izmijeni" asp-controller="Korisnici">Profil</a>
+                        <a class="button" asp-action="MojiRecepti" asp-controller="Recepti">Moji recepti</a>
+                        <a class="button" asp-action="PromijeniLozinku" asp-controller="Korisnici">Promijeni lozinku</a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a class="button" asp-action="Index" asp-controller="Korisnici">Korisnici</a>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+        @RenderBody()
+        <footer>
+            <p>&copy; @DateTime.Now.Year</p>
+        </footer>
+    </div>
+
+    <environment include="Development">
+        <script src="~/lib/js/jquery.min.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+</body>
+</html>

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<KorisnikViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="korisnici-container">
+    <h2 class="heading">Korisnici</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Korisničko ime</th>
+                <th>Ime i prezime</th>
+                <th>Banovan</th>
+                <th>Akcije</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.KorisnickoIme</td>
+                    <td>@item.ImePrezime</td>
+                    <td>@item.Banovan</td>
+                    <td style="display: flex; justify-content: center;">
+                        <form method="post" asp-action="Ban" asp-route-id="@item.KorisnikId" style="margin-right: 10px;" class="form-ban">
+                            <button class="button" type="submit">@(item.BoolBanovan ? "Unban" : "Ban")</button>
+                        </form>
+
+                        <form method="post" asp-action="Brisi" asp-route-id="@item.KorisnikId" class="form-brisi">
+                            <button class="button" type="submit">Izbriši korisnika</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,32 @@
+﻿@model DetaljiReceptaViewModel
+@{
+    ViewData["Title"] = "Detalji";
+}
+
+<div class="recet-detalji-container">
+    <div class="recept-header-image" style="background: url(/slike-recepata/@Model.SlikaURL) no-repeat center center; background-size: cover"></div>
+    <h1 class="center-align heading">@Model.Naziv</h1>
+
+    <div class="recept-additional-details">
+        <p>
+            Dodao: @(Model.Korisnik), @Model.DatumObjave
+        </p>
+        <p>Kategorija: @Model.Kategorija</p>
+    </div>
+
+    <div>
+        <h3>Sastav:</h3>
+        <ol>
+            @foreach (var item in Model.Sastav)
+            {
+                <li>@item</li>
+            }
+        </ol>
+    </div>
+
+    <div>
+        <h3 class="heading">Priprema:</h3>
+        <div>@Html.Raw(Model.Priprema)</div>
+    </div>
+</div>
+

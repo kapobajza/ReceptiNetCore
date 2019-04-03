@@ -1,0 +1,470 @@
+﻿body, html, h1, h2, h3, h4, h5, h6, p {
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.heading {
+    margin-bottom: 20px;
+}
+
+.center-align {
+    text-align: center;
+}
+
+input,
+textarea {
+    box-sizing: border-box;
+}
+
+    input:not([type="submit"]):not([type="checkbox"]):not([type="file"]),
+    textarea,
+    select {
+        border-radius: 8px;
+        padding: 10px 15px;
+        width: 100%;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+textarea {
+    resize: none;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 15px;
+    background-color: transparent;
+}
+
+.table td, .table th {
+    padding: 10px;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+.button {
+    padding: 10px 15px;
+    color: #FFF;
+    background-color: #0095ff;
+    border: 1px solid #07c;
+    border-radius: 3px;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    transition: 0.5s;
+    font-size: 15px;
+    font-family: Arial;
+}
+
+    .button:hover {
+        color: #fff;
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }
+
+a.button {
+    display: inline-block;
+}
+
+.button-green {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+    .button-green:hover {
+        color: #fff;
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    align-items: center;
+    background: white;
+    z-index: 999;
+}
+
+.body-content {
+    margin-top: 80px;
+}
+
+footer {
+    padding: 15px;
+    background-color: #ededed;
+}
+
+a {
+    text-decoration: none;
+}
+
+.account-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.account-inner-div {
+    width: 80%;
+    max-width: 500px;
+}
+
+    .account-inner-div h2 {
+        text-align: center;
+    }
+
+.form-control {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+    .form-control label {
+        margin-bottom: 5px;
+        display: block;
+    }
+
+.input-validation-error {
+    border-color: #d44950;
+}
+
+.field-validation-error {
+    color: #d44950;
+    margin-bottom: 10px;
+}
+
+.account-buttons {
+    text-align: center;
+}
+
+.user-icon {
+    color: #FFF;
+    background-color: #0095ff;
+    border: 1px solid #07c;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.account-logged-in-btns {
+    position: relative;
+}
+
+.icon-buttons {
+    position: absolute;
+    flex-direction: column;
+    top: 0;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #07c;
+    display: none;
+}
+
+    .icon-buttons .button:not(:last-child) {
+        margin-bottom: 10px;
+    }
+
+.form-container {
+    width: 60%;
+    max-width: 700px;
+    padding: 10px;
+}
+
+.recepti-container {
+    padding: 10px;
+}
+
+.recept-row {
+    margin: 20px 0;
+    display: flex;
+}
+
+.recept-image {
+    height: 300px;
+    width: 300px;
+    margin-right: 30px;
+}
+
+.recept-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    width: 400px;
+}
+
+.recepti-buttons {
+    position: absolute;
+    bottom: 0;
+}
+
+.recept-tooltip {
+    display: inline-block;
+}
+
+.recet-detalji-container {
+    width: 80%;
+    margin: 0 auto;
+    max-width: 900px;
+    margin-bottom: 30px;
+}
+
+    .recet-detalji-container .recept-additional-details {
+        text-align: center;
+    }
+
+.recept-header-image {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 20px;
+}
+
+.home-link {
+    color: black;
+}
+
+    .home-link:visited {
+        color: black;
+    }
+
+#recept-added-image {
+    width: 300px;
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.error-outer-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-inner-container {
+    text-align: center;
+}
+
+    .error-inner-container h2,
+    .error-inner-container p {
+        margin-bottom: 10px;
+    }
+
+.recepti-header-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.recepti-search-container {
+    display: flex;
+}
+
+.recepti-filter-container {
+    display: flex;
+    align-items: center;
+}
+
+    .recepti-filter-container label {
+        width: 100%;
+        white-space: nowrap;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .recepti-filter-container select {
+        margin-bottom: 0;
+    }
+
+.btn-dodaj-recept {
+    margin-right: 15px;
+}
+
+.pretraga-buttons {
+    display: flex;
+    width: 500px;
+}
+
+#search-recepti {
+    margin-right: 15px;
+    margin-bottom: 0;
+}
+
+.korisnici-container {
+    width: 60%;
+    padding: 10px 20px;
+}
+
+.form-recept-brisi {
+    display: inline-block;
+}
+
+.notification {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+    padding: 10px 15px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    width: 40%;
+    text-align: center;
+}
+
+.notification-container {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 9999;
+    top: 10px;
+}
+
+/* Switch css */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+/* Switch css end */
+
+/* Tooltip css */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    cursor: pointer;
+}
+
+    .tooltip .tooltip-text {
+        display: none;
+        max-width: 200px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 150%;
+        left: 50%;
+        margin-left: -60px;
+        white-space: nowrap;
+    }
+
+        .tooltip .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: black transparent transparent transparent;
+        }
+
+    .tooltip:hover .tooltip-text {
+        display: block;
+    }
+/* Tooltip css end */
+
+/* Loader */
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    display: none;
+    margin-top: 20px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+/* Loader end */

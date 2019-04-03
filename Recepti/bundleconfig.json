@@ -1,0 +1,16 @@
+[
+  {
+    "outputFileName": "wwwroot/js/jquery-validate-bundle.min.js",
+    "inputFiles": [
+      "wwwroot/lib/js/jquery.js",
+      "wwwroot/lib/js/jquery.validate.js",
+      "wwwroot/lib/js/jquery.validate.unobtrusive.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": false
+  }
+]

@@ -1,0 +1,57 @@
+﻿@model DodajIzmijeniReceptViewModel
+@{
+    var title = Model.ReceptId == 0 ? "Dodaj" : "Izmijeni";
+    ViewData["Title"] = title;
+}
+
+<div class="form-container">
+    <h2 class="heading">@title recept</h2>
+    <form method="post" enctype="multipart/form-data">
+        <input asp-for="ReceptId" type="hidden" />
+
+        <div class="form-control">
+            <label asp-for="Naziv"></label>
+            <input asp-for="Naziv" />
+            <span asp-validation-for="Naziv"></span>
+        </div>
+
+        <div class="form-control">
+            <label asp-for="Sastav"></label>
+            <textarea asp-for="Sastav" rows="4"></textarea>
+            <span asp-validation-for="Sastav"></span>
+        </div>
+
+        <div class="form-control">
+            <label asp-for="Priprema"></label>
+            <textarea rows="4" name="Priprema">@Html.Raw(Model.Priprema)</textarea>
+            <span asp-validation-for="Priprema"></span>
+        </div>
+
+        <div class="form-control">
+            <label asp-for="Kategorije"></label>
+            <select asp-for="Kategorija" asp-items="Model.Kategorije"></select>
+        </div>
+
+        <div class="form-control">
+            <label id="Javan">Javan</label>
+            <label class="switch">
+                <input type="checkbox" asp-for="Privatan" />
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+        <div class="form-control">
+            <label asp-for="Slika"></label>
+            <input asp-for="Slika" id="recept-input-image" />
+            <span asp-validation-for="Slika"></span>
+            <input asp-for="SlikaURL" type="hidden" id="SlikaURL" />
+        </div>
+
+        <button type="submit" class="button">Sačuvaj</button>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/js/jquery-validate-bundle.min.js"></script>
+}
+

@@ -1,0 +1,9 @@
+﻿@model KorisnikReceptiViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="recepti-container">
+    @await Html.PartialAsync("~/Views/Recepti/_ReceptiHeaderButtons.cshtml", new HeaderButtonsViewModel() { IsHomePage = true, Kategorije = Model.Kategorije })
+    @await Html.PartialAsync("~/Views/Recepti/_ListaRecepata.cshtml", Model)
+</div>

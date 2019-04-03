@@ -1,0 +1,25 @@
+﻿@model string
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Error</title>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+</head>
+<body>
+    <div class="error-outer-container">
+        <div class="error-inner-container">
+            <h2>Error</h2>
+            <p>@Model</p>
+            <button class="button" onclick="window.history.back()">Nazad na prošlu stranicu</button>
+        </div>
+    </div>
+</body>
+</html>

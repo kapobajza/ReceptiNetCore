@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Korisnik>
+@{
+    ViewData["Title"] = "Attack";
+}
+
+@foreach (var item in Model)
+{
+    <p>@item.Ime</p>
+}

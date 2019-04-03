@@ -1,0 +1,45 @@
+﻿@model LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+</head>
+<body>
+    <div class="account-container">
+        <div class="account-inner-div">
+            <h2 class="heading">Reci "PE" login</h2>
+
+            <form method="post">
+                <div class="form-control">
+                    <input asp-for="KorisnickoIme" placeholder="Korisničko ime" />
+                    <span asp-validation-for="KorisnickoIme"></span>
+                </div>
+
+                <div class="form-control">
+                    <input asp-for="Password" type="password" placeholder="Lozinka" />
+                    <span asp-validation-for="Password"></span>
+                </div>
+                <div style="margin-bottom: 10px">
+                    @Html.ValidationMessage("LoginGreska")
+                </div>
+
+                <div class="account-buttons">
+                    <button class="button" type="submit">Logiraj se</button>
+                    <a class="button" asp-action="Register">Registracija</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="~/js/jquery-validate-bundle.min.js"></script>
+</body>
+</html>
