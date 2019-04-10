@@ -261,4 +261,4 @@ __pycache__/
 *.pyc
 
 # Custom
-/Recepti/wwwroot/slike-recepata
+wwwroot/slike-recepata/*
