@@ -3,6 +3,9 @@
     Layout = null;
 }
 
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
 <!DOCTYPE html>
 
 <html>
@@ -12,6 +15,7 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <div class="account-container">
@@ -28,8 +32,14 @@
                     <input asp-for="Password" type="password" placeholder="Lozinka" />
                     <span asp-validation-for="Password"></span>
                 </div>
+
                 <div style="margin-bottom: 10px">
                     @Html.ValidationMessage("LoginGreska")
+                </div>
+
+                <div class="form-control-g-recaptcha">
+                    @Html.GoogleReCaptcha(Configuration.GetValue<string>("GoogleReCaptcha:ClientKey"))
+                    <span asp-validation-for="GoogleReCaptchaResponse"></span>
                 </div>
 
                 <div class="account-buttons">

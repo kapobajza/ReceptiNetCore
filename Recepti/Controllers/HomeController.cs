@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Recepti.Context;
 using Recepti.Helpers;
 using Recepti.Models;
@@ -27,7 +28,6 @@ namespace Recepti.Controllers
 
         public IActionResult Index()
         {
-            var aa = User.IsInRole("Admin");
             var recepti = _receptRepo.GetAll(x => !x.Privatan, "Korisnik");
             int.TryParse(User.FindFirst(x => x.Type == "Id")?.Value, out int id);
             var model = new KorisnikReceptiViewModel()
@@ -66,5 +66,20 @@ namespace Recepti.Controllers
         {
             return cookie;
         }
+
+        [HttpPost]
+        public IActionResult PostFile([FromBody]Info value)
+        {
+            //throw new Exception();
+            return Ok();
+        }
+    }
+
+    public class Info
+    {
+        public string Name;
+
+        [JsonProperty(TypeNameHandling = TypeNameHandling.All)]
+        public object obj;
     }
 }

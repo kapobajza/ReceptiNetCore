@@ -345,6 +345,13 @@ a {
     top: 10px;
 }
 
+.form-control-g-recaptcha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
 /* Switch css */
 .switch {
     position: relative;

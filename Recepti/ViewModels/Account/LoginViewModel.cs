@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Recepti.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Recepti.ViewModels.Account
 {
-    public class LoginViewModel
+    public class LoginViewModel : GoogleReCaptchaModelBase
     {
         [Required(ErrorMessage = "Polje Korisničko ime je obavezno")]
         [Display(Name = "Korisničko ime")]

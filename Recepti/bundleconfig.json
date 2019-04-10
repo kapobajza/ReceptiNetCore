@@ -4,7 +4,8 @@
     "inputFiles": [
       "wwwroot/lib/js/jquery.js",
       "wwwroot/lib/js/jquery.validate.js",
-      "wwwroot/lib/js/jquery.validate.unobtrusive.js"
+      "wwwroot/lib/js/jquery.validate.unobtrusive.js",
+      "wwwroot/js/validation-extensions.js"
     ],
     // Optionally specify minification options
     "minify": {

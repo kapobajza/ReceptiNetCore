@@ -52,6 +52,10 @@ namespace Recepti.Controllers
             }
 
             var pw = HashingPasswords.GenerateHashArgon2(model.Password, user.PasswordSalt);
+            //var pw2 = HashingPasswords.GenerateHashPBKDF2(model.Password, user.PasswordSalt);
+            //var pw3 = HashingPasswords.GenerateHashSHA256(model.Password, user.PasswordSalt);
+            //var pw4 = HashingPasswords.GenerateHashSHA512(model.Password, user.PasswordSalt);
+            //var pw5 = HashingPasswords.GenerateHashSHA1(model.Password, user.PasswordSalt);
 
             if (user.PasswordHash != pw)
             {
@@ -59,11 +63,7 @@ namespace Recepti.Controllers
                 return View();
             }
 
-            var identity = new ClaimsIdentity(new[] {
-                new Claim(ClaimTypes.Name, user.KorisnickoIme),
-                new Claim(ClaimTypes.Role, user.Uloga),
-                new Claim("Id", user.KorisnikId.ToString())
-            }, CookieAuthenticationDefaults.AuthenticationScheme);
+            var identity = CreateNewIdentity(user.KorisnickoIme, user.Uloga, user.KorisnikId.ToString());
 
             var principal = new ClaimsPrincipal(identity);
             await Authentication.Login(HttpContext, principal);
@@ -97,7 +97,7 @@ namespace Recepti.Controllers
             var pw = HashingPasswords.GenerateHashArgon2(model.Lozinka, salt);
             var uloga = nameof(TipKorisnikaEnum.Korisnik);
 
-            _korisnikRepo.Add(new Models.Korisnik()
+            var korisnik = new Models.Korisnik()
             {
                 PasswordHash = pw,
                 PasswordSalt = salt,
@@ -106,18 +106,28 @@ namespace Recepti.Controllers
                 Ime = model.Ime,
                 Prezime = model.Prezime,
                 Banovan = false
-            });
+            };
+
+            _korisnikRepo.Add(korisnik);
             _korisnikRepo.SaveChanges();
 
-            var identity = new ClaimsIdentity(new[] {
-                new Claim(ClaimTypes.Name, model.KorisnickoIme),
-                new Claim(ClaimTypes.Role, uloga)
-            }, CookieAuthenticationDefaults.AuthenticationScheme);
+            var identity = CreateNewIdentity(model.KorisnickoIme, uloga, korisnik.KorisnikId.ToString());
 
             var principal = new ClaimsPrincipal(identity);
             await Authentication.Login(HttpContext, principal);
 
             return RedirectToAction("Index", "Home");
+        }
+
+        private ClaimsIdentity CreateNewIdentity(string korisnickoIme, string uloga, string id)
+        {
+            var identity = new ClaimsIdentity(new[] {
+                new Claim(ClaimTypes.Name, korisnickoIme),
+                new Claim(ClaimTypes.Role, uloga),
+                new Claim("Id", id)
+            }, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            return identity;
         }
     }
 }
