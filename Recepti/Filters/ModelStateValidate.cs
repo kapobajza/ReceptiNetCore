@@ -15,8 +15,7 @@ namespace Recepti.Filters
         {
             var modelState = context.ModelState;
             var controller = context.Controller as Controller;
-            object model = null;
-            context.ActionArguments.TryGetValue("model", out model);
+            context.ActionArguments.TryGetValue("model", out object model);
 
             if (model != null && model is DodajIzmijeniReceptViewModel m)
             {
