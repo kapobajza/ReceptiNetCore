@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Recepti.Filters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -31,6 +32,7 @@ namespace Recepti.ViewModels.Recepti
         public bool Privatan { get; set; }
 
         [Display(Name = "Odaberite sliku")]
+        //[ImageFileValidator(ErrorMessage = "Molimo da odaberete sliku.")]
         public IFormFile Slika { get; set; }
 
         public string SlikaURL { get; set; }

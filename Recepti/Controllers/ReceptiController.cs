@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Encodings.Web;
 using Ganss.XSS;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -21,6 +20,7 @@ namespace Recepti.Controllers
         private readonly IReceptRepo _receptRepo;
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly HtmlSanitizer _htmlSanitizer;
+        private const int MAX_UPLOAD_SIZE = 2;
 
         public ReceptiController(IReceptRepo receptRepo, IHostingEnvironment hostingEnvironment)
         {
@@ -40,7 +40,7 @@ namespace Recepti.Controllers
 
             if (id != null)
             {
-                var recept = _receptRepo.Get(x => x.ReceptId == id.Value);
+                var recept = _receptRepo.Get(id.Value);
                 model.Kategorija = recept.Kategorija;
                 model.Naziv = recept.Naziv;
                 model.Priprema = recept.Priprema;
@@ -66,7 +66,7 @@ namespace Recepti.Controllers
 
             if (model.ReceptId != 0)
             {
-                recept = _receptRepo.Get(x => x.ReceptId == model.ReceptId);
+                recept = _receptRepo.Get(model.ReceptId);
             }
 
             if (recept != null && recept.KorisnikId != korisnikId)
@@ -82,9 +82,26 @@ namespace Recepti.Controllers
                     return View(model);
                 }
 
+                if (model.Slika.Length > MAX_UPLOAD_SIZE * 1024 * 1024)
+                {
+                    ModelState.AddModelError("Slika", $"Maksimalna veličina slike ne smije biti veća od {MAX_UPLOAD_SIZE}MB");
+                    return View(model);
+                }
+
+                if (ImageFormat.GetImageFormat(model.Slika) == null)
+                {
+                    ModelState.AddModelError("Slika", "Podržane ekstenzije fajla su: .bmp, .png, .tiff, .tiff2, .jpg, .jpeg");
+                    return View(model);
+                }
+
                 slikaUrl = FileHelpers.GetUniqueFileName(model.Slika.FileName);
                 var uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "slike-recepata");
                 var filePath = Path.Combine(uploadFolder, slikaUrl);
+
+                if (!Directory.Exists(uploadFolder))
+                {
+                    Directory.CreateDirectory(uploadFolder);
+                }
 
                 if (recept != null)
                 {
@@ -120,7 +137,7 @@ namespace Recepti.Controllers
         [AllowAnonymous]
         public IActionResult Detalji(int id)
         {
-            var recept = _receptRepo.Get(x => x.ReceptId == id, "Korisnik");
+            var recept = _receptRepo.GetWithKorisnik(id);
 
             if (recept == null)
             {
@@ -153,7 +170,7 @@ namespace Recepti.Controllers
         public IActionResult MojiRecepti()
         {
             int.TryParse(User.FindFirst(x => x.Type == "Id")?.Value, out int id);
-            var recepti = _receptRepo.GetAll(x => x.KorisnikId == id);
+            var recepti = _receptRepo.GetAllFromKorisnik(id);
             var model = InstantiateKorisnikReceptiVM(id, recepti, false, true);
 
             return View(model);
@@ -185,14 +202,7 @@ namespace Recepti.Controllers
 
         private IEnumerable<Recept> GetReceptiWithFilters(int korisnikId, string keyword = "", bool isHomePage = true, string kategorija = "")
         {
-            var recepti = _receptRepo.GetAll(
-                x => (
-                    x.Naziv.Contains(keyword) || string.IsNullOrEmpty(keyword))
-                    && (!isHomePage ? x.KorisnikId == korisnikId : true)
-                    && (string.IsNullOrEmpty(kategorija) ? true : x.Kategorija == kategorija),
-                "Korisnik"
-            );
-
+            var recepti = _receptRepo.GetAllWithFilters(korisnikId, keyword, isHomePage, kategorija);
             return recepti;
         }
 
@@ -231,11 +241,19 @@ namespace Recepti.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Brisi(int id)
         {
-            var recept = _receptRepo.Get(x => x.ReceptId == id);
+            var recept = _receptRepo.Get(id);
 
             if (recept == null)
             {
                 return NotFound();
+            }
+
+            var uploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "slike-recepata");
+            var filePath = Path.Combine(uploadFolder, recept.SlikaURL);
+
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
             }
 
             _receptRepo.Remove(recept);

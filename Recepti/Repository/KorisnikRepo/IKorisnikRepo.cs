@@ -8,6 +8,7 @@ namespace Recepti.Repository.KorisnikRepo
 {
     public interface IKorisnikRepo : IRepo<Korisnik>
     {
-
+        IEnumerable<Korisnik> GetAllNoAdmins();
+        Korisnik GetByUsername(string username);
     }
 }

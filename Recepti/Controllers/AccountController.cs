@@ -37,7 +37,7 @@ namespace Recepti.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            var user = _korisnikRepo.Get(x => x.KorisnickoIme == model.KorisnickoIme);
+            var user = _korisnikRepo.GetByUsername(model.KorisnickoIme);
 
             if (user == null)
             {

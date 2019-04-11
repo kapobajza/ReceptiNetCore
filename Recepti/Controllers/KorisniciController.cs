@@ -22,7 +22,7 @@ namespace Recepti.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
-            var korisnici = _korisnikRepo.GetAll(x => x.Uloga != "Admin");
+            var korisnici = _korisnikRepo.GetAllNoAdmins();
             var model = new List<KorisnikViewModel>();
 
             foreach (var item in korisnici)
@@ -45,7 +45,7 @@ namespace Recepti.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Ban(int id)
         {
-            var korisnik = _korisnikRepo.Get(x => x.KorisnikId == id);
+            var korisnik = _korisnikRepo.Get(id);
 
             if (korisnik == null)
             {
@@ -67,7 +67,7 @@ namespace Recepti.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Brisi(int id)
         {
-            var korisnik = _korisnikRepo.Get(x => x.KorisnikId == id);
+            var korisnik = _korisnikRepo.Get(id);
 
             if (korisnik == null)
             {
@@ -87,7 +87,7 @@ namespace Recepti.Controllers
         {
             int.TryParse(User?.FindFirst("Id")?.Value, out int korisnikId);
 
-            var korisnik = _korisnikRepo.Get(x => x.KorisnikId == korisnikId);
+            var korisnik = _korisnikRepo.Get(korisnikId);
 
             if (korisnik == null)
             {
@@ -111,7 +111,7 @@ namespace Recepti.Controllers
         {
             int.TryParse(User?.FindFirst("Id")?.Value, out int korisnikId);
 
-            var korisnik = _korisnikRepo.Get(x => x.KorisnikId == korisnikId);
+            var korisnik = _korisnikRepo.Get(korisnikId);
 
             if (korisnik == null)
             {
@@ -142,7 +142,7 @@ namespace Recepti.Controllers
         {
             int.TryParse(User?.FindFirst("Id")?.Value, out int korisnikId);
 
-            var korisnik = _korisnikRepo.Get(x => x.KorisnikId == korisnikId);
+            var korisnik = _korisnikRepo.Get(korisnikId);
 
             if (korisnik == null)
             {

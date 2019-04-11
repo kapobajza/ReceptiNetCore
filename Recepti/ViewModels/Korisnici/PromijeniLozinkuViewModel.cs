@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Recepti.Filters;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,12 +15,14 @@ namespace Recepti.ViewModels.Korisnici
         public string TrenutnaLozinka { get; set; }
 
         [Required(ErrorMessage = "Polje Nova lozinka je obavezno")]
+        [PasswordValidator]
         [Display(Name = "Nova lozinka")]
         [Compare("NovaLozinkaPonovo", ErrorMessage = "Lozinke moraju biti jednake")]
         [DataType(DataType.Password)]
         public string NovaLozinka { get; set; }
 
         [Required(ErrorMessage = "Polje je obavezno")]
+        [PasswordValidator]
         [Display(Name = "Ponovite novu lozinku")]
         [Compare("NovaLozinka", ErrorMessage = "Lozinke moraju biti jednake")]
         [DataType(DataType.Password)]

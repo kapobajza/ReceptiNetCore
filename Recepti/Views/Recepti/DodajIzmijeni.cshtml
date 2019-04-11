@@ -1,12 +1,12 @@
 ﻿@model DodajIzmijeniReceptViewModel
 @{
-    var title = Model.ReceptId == 0 ? "Dodaj" : "Izmijeni";
+    var title = Model?.ReceptId == 0 ? "Dodaj" : "Izmijeni";
     ViewData["Title"] = title;
 }
 
 <div class="form-container">
     <h2 class="heading">@title recept</h2>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" id="form-dodaj-izmijeni-recept">
         <input asp-for="ReceptId" type="hidden" />
 
         <div class="form-control">
@@ -23,7 +23,7 @@
 
         <div class="form-control">
             <label asp-for="Priprema"></label>
-            <textarea rows="4" name="Priprema">@Html.Raw(Model.Priprema)</textarea>
+            <textarea rows="4" asp-for="Priprema">@Html.Raw(Model.Priprema)</textarea>
             <span asp-validation-for="Priprema"></span>
         </div>
 

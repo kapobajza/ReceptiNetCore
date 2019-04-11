@@ -22,36 +22,33 @@ namespace Recepti.Repository.KorisnikRepo
             _context.Korisnici.Add(item);
         }
 
-        public Korisnik Get(Expression<Func<Korisnik, bool>> expression, string include = "")
+        public Korisnik Get(int id)
         {
-            if (string.IsNullOrEmpty(include))
-            {
-                return _context
-                    .Korisnici
-                    .FirstOrDefault(expression);
-            }
-
             return _context
                 .Korisnici
-                .Include(include)
-                .FirstOrDefault(expression);
+                .FirstOrDefault(x => x.KorisnikId == id);
         }
 
-        public IEnumerable<Korisnik> GetAll(Expression<Func<Korisnik, bool>> expression = null, string include = "")
+        public IEnumerable<Korisnik> GetAll()
         {
-            if (string.IsNullOrEmpty(include))
-            {
-                return _context
-                    .Korisnici
-                    .Where(expression ?? (x => true))
-                    .ToList();
-            }
-
             return _context
                 .Korisnici
-                .Include(include)
-                .Where(expression ?? (x => true))
                 .ToList();
+        }
+
+        public IEnumerable<Korisnik> GetAllNoAdmins()
+        {
+            return _context
+                .Korisnici
+                .Where(x => x.Uloga != "Admin")
+                .ToList();
+        }
+
+        public Korisnik GetByUsername(string username)
+        {
+            return _context
+                .Korisnici
+                .FirstOrDefault(x => x.KorisnickoIme == username);
         }
 
         public void Remove(Korisnik item)

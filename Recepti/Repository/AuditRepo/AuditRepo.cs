@@ -22,12 +22,12 @@ namespace Recepti.Repository.AuditRepo
             _context.Audit.Add(item);
         }
 
-        public Audit Get(Expression<Func<Audit, bool>> expression, string include = "")
+        public Audit Get(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Audit> GetAll(Expression<Func<Audit, bool>> expression = null, string include = "")
+        public IEnumerable<Audit> GetAll()
         {
             throw new NotImplementedException();
         }

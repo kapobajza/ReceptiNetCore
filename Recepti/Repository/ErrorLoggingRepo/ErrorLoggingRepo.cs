@@ -23,35 +23,17 @@ namespace Recepti.Repository.ErrorLoggingRepo
             _context.ErrorLogging.Add(item);
         }
 
-        public ErrorLogging Get(Expression<Func<ErrorLogging, bool>> expression, string include = "")
+        public ErrorLogging Get(int id)
         {
-            if (string.IsNullOrEmpty(include))
-            {
-                return _context
-                    .ErrorLogging
-                    .FirstOrDefault(expression ?? (x => true));
-            }
-
             return _context
                 .ErrorLogging
-                .Include(include)
-                .FirstOrDefault(expression ?? (x => true));
+                .FirstOrDefault(x => x.ErrorLoggingId == id);
         }
 
-        public IEnumerable<ErrorLogging> GetAll(Expression<Func<ErrorLogging, bool>> expression = null, string include = "")
+        public IEnumerable<ErrorLogging> GetAll()
         {
-            if (string.IsNullOrEmpty(include))
-            {
-                return _context
-                    .ErrorLogging
-                    .Where(expression ?? (x => true))
-                    .ToList();
-            }
-
             return _context
                 .ErrorLogging
-                .Include(include)
-                .Where(expression ?? (x => true))
                 .ToList();
         }
 

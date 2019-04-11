@@ -22,38 +22,71 @@ namespace Recepti.Repository.ReceptRepo
             _context.Recepti.Add(item);
         }
 
-        public Recept Get(Expression<Func<Recept, bool>> expression, string include = "")
+        public Recept Get(int id)
         {
-            if (string.IsNullOrEmpty(include))
-            {
-                return _context
-                    .Recepti
-                    .AsNoTracking()
-                    .FirstOrDefault(expression);
-            }
-
             return _context
                 .Recepti
-                .Include(include)
                 .AsNoTracking()
-                .FirstOrDefault(expression);
+                .FirstOrDefault(x => x.ReceptId == id);
         }
 
-        public IEnumerable<Recept> GetAll(Expression<Func<Recept, bool>> expression = null, string include = "")
+        public IEnumerable<Recept> GetAll()
         {
-            if (string.IsNullOrEmpty(include))
-            {
-                return _context
-                    .Recepti
-                    .Where(expression ?? (x => true))
-                    .ToList();
-            }
-
             return _context
                 .Recepti
-                .Include(include)
-                .Where(expression ?? (x => true))
+                .OrderByDescending(x => x.DatumObjave)
                 .ToList();
+        }
+
+        public IEnumerable<Recept> GetAllFromKorisnik(int id)
+        {
+            return _context
+                .Recepti
+                .Include(x => x.Korisnik)
+                .Where(x => x.KorisnikId == id)
+                .OrderByDescending(x => x.DatumObjave)
+                .ToList();
+        }
+
+        public IEnumerable<Recept> GetAllPrivateFilter(bool includePrivate = false)
+        {
+            return _context
+                .Recepti
+                .Include(x => x.Korisnik)
+                .Where(x => includePrivate ? true : !x.Privatan)
+                .OrderByDescending(x => x.DatumObjave)
+                .ToList();
+        }
+
+        public IEnumerable<Recept> GetAllWithFilters(int korisnikId, string keyword = "", bool isHomePage = true, string kategorija = "")
+        {
+            return _context
+                .Recepti
+                .Include(x => x.Korisnik)
+                .Where(x => (
+                    x.Naziv.Contains(keyword) || string.IsNullOrEmpty(keyword))
+                    && (!isHomePage ? x.KorisnikId == korisnikId : true)
+                    && (string.IsNullOrEmpty(kategorija) ? true : x.Kategorija == kategorija))
+                .OrderByDescending(x => x.DatumObjave)
+                .ToList();
+        }
+
+        public IEnumerable<Recept> GetAllWithKorisnik()
+        {
+            return _context
+                .Recepti
+                .Include(x => x.Korisnik)
+                .OrderByDescending(x => x.DatumObjave)
+                .ToList();
+        }
+
+        public Recept GetWithKorisnik(int id)
+        {
+            return _context
+                .Recepti
+                .Include(x => x.Korisnik)
+                .AsNoTracking()
+                .FirstOrDefault(x => x.ReceptId == id);
         }
 
         public void Remove(Recept item)

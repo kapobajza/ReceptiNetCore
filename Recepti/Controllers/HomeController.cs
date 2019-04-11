@@ -28,7 +28,7 @@ namespace Recepti.Controllers
 
         public IActionResult Index()
         {
-            var recepti = _receptRepo.GetAll(x => !x.Privatan, "Korisnik");
+            var recepti = _receptRepo.GetAllPrivateFilter();
             int.TryParse(User.FindFirst(x => x.Type == "Id")?.Value, out int id);
             var model = new KorisnikReceptiViewModel()
             {

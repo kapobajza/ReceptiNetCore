@@ -48,7 +48,8 @@
     }
 
     if (slikaUrl && slikaUrl.val()) {
-        inputImage.after('<img src="/slike-recepata/' + slikaUrl.val() + '" id="recept-added-image" />');
+        var url = '/slike-recepata/' + slikaUrl.val();
+        inputImage.after('<img src="' + url + '" id="recept-added-image" />');
     }
 
     inputImage.change(function () {
