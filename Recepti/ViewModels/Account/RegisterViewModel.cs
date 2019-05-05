@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Recepti.ViewModels.Account
 {
-    public class RegisterViewModel : GoogleReCaptchaModelBase
+    public class RegisterViewModel /*: GoogleReCaptchaModelBase*/
     {
         [Required(ErrorMessage = "Polje Korisničko ime je obavezno")]
         [Display(Name = "Korisničko ime")]

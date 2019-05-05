@@ -12,7 +12,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
-    <environment include="Development">
+    <environment include="Development,Production">
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -37,10 +37,10 @@
                     @Html.ValidationMessage("LoginGreska")
                 </div>
 
-                <div class="form-control-g-recaptcha">
+                @*<div class="form-control-g-recaptcha">
                     @Html.GoogleReCaptcha(Configuration.GetValue<string>("GoogleReCaptcha:ClientKey"))
                     <span asp-validation-for="GoogleReCaptchaResponse"></span>
-                </div>
+                </div>*@
 
                 <div class="account-buttons">
                     <button class="button" type="submit">Logiraj se</button>

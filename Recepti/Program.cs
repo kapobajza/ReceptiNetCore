@@ -19,6 +19,11 @@ namespace Recepti
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    var directory = Directory.GetParent(Directory.GetCurrentDirectory());
+                    config.AddJsonFile($@"{directory}/Secrets/secrets.json", false, true);
+                })
                 .UseKestrel(x => x.AddServerHeader = false)
                 .UseStartup<Startup>();
     }
