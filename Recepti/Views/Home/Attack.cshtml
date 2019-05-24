@@ -3,7 +3,21 @@
     ViewData["Title"] = "Attack";
 }
 
-@foreach (var item in Model)
-{
-    <p>@item.Ime</p>
-}
+@*<a id="csrf-attack" href="#">Osvojite 1000$ ODMAH!</a>*@
+
+<div style="padding: 10px">
+    <h4>Pronađeni korisnici</h4>
+    <table border="1" style="margin-top: 10px">
+        <tr>
+            <th>Ime</th>
+            <th>Prezime</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Ime</td>
+                <td>@item.Prezime</td>
+            </tr>
+        }
+    </table>
+</div>

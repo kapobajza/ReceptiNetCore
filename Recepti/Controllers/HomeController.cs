@@ -57,7 +57,7 @@ namespace Recepti.Controllers
 
         public IActionResult Attack(string ime)
         {
-            var query = "SELECT * FROM Korisnici WHERE Ime='" + ime + "'";
+            FormattableString query = $"SELECT * FROM Korisnici WHERE Ime='{ime}' AND Uloga = 'Korisnik'";
             var searchedUsers = _context.Set<Korisnik>().FromSql(query).ToList();
             return View("Attack", searchedUsers);
         }

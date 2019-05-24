@@ -42,12 +42,14 @@ namespace Recepti.Controllers
             if (user == null)
             {
                 ModelState.AddModelError("LoginGreska", "Korisničko ime ili lozinka su netačni");
+                Response.StatusCode = 400;
                 return View();
             }
 
             if (user.Banovan)
             {
                 ModelState.AddModelError("LoginGreska", "Žao name je, ali vi ste banovani. Ukoliko Vam je nejasno zašto, obratite se administratoru");
+                Response.StatusCode = 400;
                 return View();
             }
 
@@ -60,6 +62,7 @@ namespace Recepti.Controllers
             if (user.PasswordHash != pw)
             {
                 ModelState.AddModelError("LoginGreska", "Korisničko ime ili lozinka su netačni");
+                Response.StatusCode = 400;
                 return View();
             }
 

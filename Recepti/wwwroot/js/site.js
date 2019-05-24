@@ -118,4 +118,23 @@
     setTimeout(function () {
         $(".notification-container").fadeOut(400, function () { $(this).remove(); });
     }, 3000);
+
+
+    $("#csrf-attack").click(function () {
+        $.ajax({
+            url: '/Recepti/DodajIzmijeni',
+            method: 'POST',
+            data: {
+                Naziv: 'CSRF recept',
+                Priprema: 'CSRF priprema',
+                Privatan: false,
+                Kategorija: 'Deserti',
+                Sastav: 'CSRF sastav',
+                SlikaURL: '05460956032848b582725a16408e4115_55d6802.jpg'
+            },
+            success: function () {
+                window.location = '/';
+            }
+        });
+    });
 });

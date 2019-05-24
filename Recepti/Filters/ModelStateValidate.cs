@@ -24,6 +24,7 @@ namespace Recepti.Filters
 
             if (!modelState.IsValid)
             {
+                context.HttpContext.Response.StatusCode = 400;
                 context.Result = controller?.View(model) ?? new ViewResult();
             }
             else

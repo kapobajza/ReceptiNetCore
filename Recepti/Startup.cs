@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
@@ -50,8 +51,12 @@ namespace Recepti
 
             services.AddMvc(options =>
             {
-                // Uncomment to enable auditing
-                //options.Filters.Add(typeof(AuditFilter));
+                bool.TryParse(Configuration["AuditingEnabled"], out bool auditingEnabled);
+
+                if (auditingEnabled)
+                {
+                    options.Filters.Add(typeof(AuditFilter));
+                }
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1).AddSessionStateTempDataProvider();
 
             var connString = Configuration["ReceptiConnectionString"];
